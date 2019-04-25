@@ -8,10 +8,8 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zptc.gx.permission.entity.Menu;
-import com.zptc.gx.permission.entity.Role;
-import com.zptc.gx.permission.entity.RoleMenuRel;
-import com.zptc.gx.permission.entity.ZptcUser;
+import com.zptc.gx.branch.entity.OrganizationMember;
+import com.zptc.gx.branch.entity.OrganizationType;
 
 public class CreateService {
 
@@ -27,10 +25,8 @@ public class CreateService {
 		List<Class> clsList = new ArrayList<Class>();
 		// 閹跺﹪娓剁憰浣烘晸閹存亯omain閺傚洣娆㈤惃鍑濷缁濮為崚鐧搃st娑擄拷
 
-		clsList.add(Menu.class);
-		clsList.add(Role.class);
-		clsList.add(RoleMenuRel.class);
-		clsList.add(ZptcUser.class);
+		clsList.add(OrganizationMember.class);
+		clsList.add(OrganizationType.class);
 
 		for (Class cls1 : clsList) {
 			String className = cls1.getName();
@@ -130,7 +126,7 @@ public class CreateService {
 		sb1.append("\tpublic int add" + doName + "(" + doName + " "
 				+ pojoNameObject + "){\n");
 		sb1.append("\t\t")
-				.append(mapperNameObject + ".insertSelective(" + doNameObject
+				.append("return " + mapperNameObject + ".insertSelective(" + doNameObject
 						+ ");").append("\n");
 		sb1.append("\t}\n");
 		sb.append(sb1);
@@ -140,7 +136,7 @@ public class CreateService {
 		sb2.append("\tpublic int modify" + doName + "(" + doName + " "
 				+ pojoNameObject + "){\n");
 		sb2.append("\t\t")
-				.append(mapperNameObject + ".updateByPrimaryKeySelective("
+				.append("return " + mapperNameObject + ".updateByPrimaryKeySelective("
 						+ doNameObject + ");").append("\n");
 		sb2.append("\t}\n");
 		sb.append(sb2);
@@ -149,7 +145,7 @@ public class CreateService {
 		sb3.append("\t@Override\n");
 		sb3.append("\tpublic int delete" + doName + "ById(Long id){\n");
 		sb3.append("\t\t")
-				.append(mapperNameObject + ".deleteByPrimaryKey(id);")
+				.append("return " + mapperNameObject + ".deleteByPrimaryKey(id);")
 				.append("\n");
 		sb3.append("\t}\n");
 		sb.append(sb3);
